@@ -76,6 +76,9 @@ Ensure these dependencies are installed in your Python environment.
 pyinstaller --onefile --name {INSERT_NAME} --noconsole run.py
 ```
 
+Upon Successful Execution:
+![IMG_20240907_204035](https://github.com/user-attachments/assets/7418c025-f408-4e46-bd1f-9b901f66bd96)
+
 
 ## Security Considerations
 
